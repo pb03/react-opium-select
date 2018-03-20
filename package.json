@@ -1,6 +1,6 @@
 {
   "name": "react-opium-select",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple select dropdown with a better UI.",
   "main": "build/index.js",
   "peerDependencies": {
