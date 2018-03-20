@@ -1,0 +1,105 @@
+.opm-container * {
+  box-sizing: border-box;
+}
+
+.opm-container {
+  position: relative;
+  max-width: 100%;
+  margin-top: 5px;
+  font-size: 16px;
+  text-align: left;
+  outline: none;
+  transition: transform 0.3s, box-shadow 0.2s;
+}
+
+.opm-container:focus {
+  box-shadow: 0 2px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+.shrink {
+  transform: scaleY(0.9);
+}
+
+.opm-selected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: inherit;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s;
+}
+
+.shrink .opm-selected {
+  transform: scaleY(1.08);
+}
+
+.opm-selected-text {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.placeholder {
+  opacity: 0.5;
+}
+
+.chevron {
+  opacity: 0.8;
+}
+
+.opm-list {
+  --clip: inset(0 -1px 0 0);
+  --opacity: 0;
+  --maxHeight: none;
+  --hover: rgba(0, 0, 0, 0.1);
+  --scrollbar: rgba(0, 0, 0, 0.1);
+  --scrollbarThumb: rgba(0, 0, 0, 0.3);
+  
+  position: absolute;
+  z-index: 11;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: inherit;
+  border-radius: inherit;
+  background: inherit;
+  list-style: none;
+  overflow: auto;
+  max-height: var(--maxHeight);
+  opacity: var(--opacity);
+  -webkit-clip-path: var(--clip);
+  clip-path: var(--clip);
+  transition: clip-path 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: clip-path;
+}
+
+.opm-list::-webkit-scrollbar {
+	width: 4px;
+	background-color: var(--scrollbar);
+}
+
+.opm-list::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbarThumb);
+  border-radius: 2px;
+}
+
+.opm-list.is-hidden {
+  display: none;
+}
+
+.opm-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background-color 0.05s;
+}
+
+.opm-item:hover {
+  background-color: var(--hover);
+}
