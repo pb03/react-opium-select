@@ -1,6 +1,8 @@
 # react-opium-select
 A simple select dropdown with a better UI.
 
+<img src="./demo.gif" width="600" alt="Demo">
+
 ## Installation
 ```npm i react-opium-select```
 
