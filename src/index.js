@@ -14,10 +14,10 @@ class OpiumSelect extends Component {
 
     const padding = style.padding || '10px 14px';
     const borderWidth = style.borderWidth || 0;
-    const borderColor = style.borderColor || '#222'
+    const borderColor = style.borderColor || '#5D5E5F'
     const border = style.borderWidth ? `${borderWidth}px solid ${borderColor}` : 'none';
     const bgColor = style.background || '#f1f2f3';
-    const textColor = style.textColor || '#444444';
+    const textColor = style.textColor || '#3a3a3d';
     const radius = style.borderRadius || 0;
 
     this.state = {

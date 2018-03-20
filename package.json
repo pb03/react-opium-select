@@ -1,15 +1,15 @@
 {
   "name": "react-opium-select",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple select dropdown with a better UI.",
   "main": "build/index.js",
   "peerDependencies": {
-    "react": "^15.5.4"
+    "react": "^16.2.0"
   },
   "dependencies": {
-    "react": "^15.5.4",
+    "react": "^16.2.0",
     "style-loader": "^0.20.3",
-    "webpack": "^2.6.1"
+    "webpack": "^4.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

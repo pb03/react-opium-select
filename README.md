@@ -5,6 +5,8 @@ A simple select dropdown with a better UI.
 ```npm i react-opium-select```
 
 ## Usage
+
+### Basic example
 ```
 import React, { Component } from 'react';
 import Select from 'react-opium-select';
@@ -23,33 +25,45 @@ class App extends Component {
       { label: 'Jalandhar', value: 'jalandhar' }
     ];
 
-    const settings = {
-      placeholder: 'Select city...',
-      style: {
-        padding: '10px 15px',
-        background: 'linear-gradient(to right, #4CB8C4, #3CD3AD)',
-        textColor: '#333333'
-      }
-    };
-
     return (
-      <Select
-        options={items}
-        selectedValue='chandigarh'
-        settings={settings}
-        onChange={this.handleChange} />
+      <div style={{ margin: '200px auto', maxWidth: '200px' }}>
+
+        <Select
+          options={items}
+          onChange={this.handleChange} />
+
+      </div>
     );
   }
 }
+
+export default App;
 ```
 
 ## Configuration
-| Property | Type | Default value | Description |
+| Props | Type | Default value | Description |
 |---|---|---|---|
-| `options` | array | -- | Array of objects e.g. `[{ label: 'Chandigarh', value: 'chandigarh' }, ...]`
-`style` | array | -- | CSS styling options
-`placeholder` | string | -- | Placeholder for select dropdown
-`maxItems` | number | `null` | Scroll items after this number
-`animateOnSelect` | boolean | `true` | Subtle animation on item select
-`forceDirection` | string | `null` | Force open to a specified direction: `up` | `down`
+| `options` | Array | - | Array of objects e.g. `[{ label: 'Chandigarh', value: 'chandigarh' }, ...]`
+| `selectedValue` | String | `null` | Selected item |
+| `settings` | Array | - | UI settings - `style`, `placeholder`, `maxItems`, `animateOnSelect`, `forceDirection` |
+| `onChange` | Function | undefined | onChange handler
+
+### Settings
+| Props | Type | Default value | Description |
+|---|---|---|---|
+| `style` | Array | - | CSS styling options - `padding`, `background`, `textColor`, `radius`, | `borderWidth`, `borderColor` |
+| `placeholder` | String | - | Placeholder for select dropdown |
+| `maxItems` | Number | `null` | Scroll items after this number |
+| `animateOnSelect` | Boolean | `true` | Subtle animation on item select |
+| `forceDirection` | String | `null` | Force open to a specified direction - `up` or `down` |
+
+### Style
+| Props | Type | Default value | Description |
+|---|---|---|---|
+| `padding` | String | '10px 15px' | CSS padding |
+| `background` | String | '#f1f2f3' | Background color for the dropdown. Could be solid or gradient color. |
+| `textColor` | String | '#3A3A3D' | Text color, also used to compute hover and scrollbar colors, must be hex code. |
+| `radius` | Number | 0 | Border radius |
+| `borderWidth` | Number | 0 | Thikness of border |
+| `borderColor` | String | #5D5E5F | Border color |
 
