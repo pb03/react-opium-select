@@ -20,6 +20,10 @@
     "name": "Prasanjit Singh",
     "email": "prasanjit.singh@live.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pb03/react-opium-select"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
