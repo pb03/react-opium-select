@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import css from './index.css';
+import React from 'react';
 
-class OpiumSelect extends Component {
+class OpiumSelect extends React.Component {
   constructor(props) {
     super(props);
 

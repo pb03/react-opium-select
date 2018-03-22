@@ -2,19 +2,19 @@
   "name": "react-opium-select",
   "version": "0.2.0",
   "description": "A simple select dropdown with a better UI.",
-  "main": "build/index.js",
+  "main": "dist/browser.js",
+  "module": "dist/es.js",
+  "browser": "dist/browser.js",
+  "files": ["dist"],
   "peerDependencies": {
     "react": "^16.2.0"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "style-loader": "^0.20.3",
-    "webpack": "^4.1.1"
+    "react": "^16.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --watch",
-    "build": "webpack"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "author": {
     "name": "Prasanjit Singh",
@@ -26,13 +26,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.5.1",
-    "css-loader": "^0.28.11"
+    "babel-preset-react": "^6.24.1",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "keywords": [
     "select",
