@@ -1,6 +1,6 @@
 {
   "name": "react-opium-select",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Simple select dropdown with a better UI.",
   "main": "dist/browser.js",
   "module": "dist/es.js",
