@@ -6,7 +6,10 @@
   "module": "dist/es.js",
   "browser": "dist/browser.js",
   "files": [
-    "dist"
+    "dist",
+    "style.css",
+    "README.md",
+    "demo.gif"
   ],
   "peerDependencies": {
     "react": "^16.2.0"
