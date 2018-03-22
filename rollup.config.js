@@ -4,7 +4,7 @@ import uglify from 'rollup-plugin-uglify'
 
 export default [
 	{
-		input: 'src/index.js',
+		input: 'app.js',
 		output: {
 			file: pkg.main,
 			format: 'umd',
@@ -32,7 +32,7 @@ export default [
 		]
 	},
 	{
-		input: 'src/index.js',
+		input: 'app.js',
 		output: {
 			file: pkg.module,
 			format: 'es'

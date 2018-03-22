@@ -13,7 +13,7 @@ class OpiumSelect extends React.Component {
 
     const padding = style.padding || '10px 14px';
     const borderWidth = style.borderWidth || 0;
-    const borderColor = style.borderColor || '#5D5E5F'
+    const borderColor = style.borderColor || '#5D5E5F';
     const border = style.borderWidth ? `${borderWidth}px solid ${borderColor}` : 'none';
     const bgColor = style.background || '#f1f2f3';
     const textColor = style.textColor || '#3a3a3d';
@@ -289,7 +289,7 @@ class OpiumSelect extends React.Component {
     return (
       <div
         tabIndex='0'
-        className={`opm-container ${shrink ? 'shrink' : ''}`}
+        className={`opm-container ${shrink ? 'opm-shrink' : ''}`}
         style={{ background: bgColor, color: textColor, border: border, borderRadius: radius }}
         onKeyDown={e => this.handleKeyDown(e)}
         ref={el => { this.container = el }}>
@@ -298,16 +298,16 @@ class OpiumSelect extends React.Component {
           style={{ padding: padding }}
           ref={el => { this.displayedItem = el }}
           onClick={() => this.toggleDropdown()}>
-          <span className={`opm-selected-text ${!selected ? 'placeholder' : ''}`}>
+          <span className={`opm-selected-text ${!selected ? 'opm-placeholder' : ''}`}>
             {this._getLabelByValue(selected)}
           </span>
-          <svg className="chevron" width="9" height="14" viewBox="0 0 9 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <svg className="opm-chevron" width="9" height="14" viewBox="0 0 9 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <g fillRule="nonzero" fill={textColor} stroke="none" strokeWidth="1"><path d="M.829 4.997a.602.602 0 0 0 .426-.17l3.221-3.355 3.292 3.356c.237.241.616.241.83 0 .236-.242.236-.628 0-.845L4.877.193C4.762.073 4.619 0 4.454.024a.674.674 0 0 0-.427.17L.403 3.982c-.237.241-.237.627 0 .845.118.12.26.169.426.169zM.403 9.993L4.12 13.76c.118.12.26.169.426.169a.674.674 0 0 0 .427-.17L8.62 9.97c.237-.241.237-.628 0-.845-.237-.241-.616-.241-.829 0L4.524 12.48 1.232 9.124c-.237-.241-.616-.241-.83 0a.62.62 0 0 0 0 .87z"/></g>
           </svg>
         </span>
 
         <ul
-          className={`opm-list ${!isOpen ? 'is-hidden' : ''}`}
+          className={`opm-list ${!isOpen ? 'opm-hidden' : ''}`}
           style={{ top: topOffset, left: -borderWidth, width: `calc(100% + ${2 * borderWidth}px)` }}
           ref={el => { this.dropdownList = el }}>
           {options.map(item =>

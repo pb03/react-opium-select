@@ -16,7 +16,7 @@
   box-shadow: 0 2px 5px -3px rgba(0, 0, 0, 0.2);
 }
 
-.shrink {
+.opm-shrink {
   transform: scaleY(0.9);
 }
 
@@ -30,7 +30,7 @@
   transition: transform 0.3s;
 }
 
-.shrink .opm-selected {
+.opm-shrink .opm-selected {
   transform: scaleY(1.08);
 }
 
@@ -41,11 +41,11 @@
   text-overflow: ellipsis;
 }
 
-.placeholder {
+.opm-placeholder {
   opacity: 0.5;
 }
 
-.chevron {
+.opm-chevron {
   opacity: 0.8;
 }
 
@@ -85,7 +85,7 @@
   border-radius: 2px;
 }
 
-.opm-list.is-hidden {
+.opm-list.opm-hidden {
   display: none;
 }
 

@@ -356,7 +356,7 @@ var OpiumSelect = function (_React$Component) {
         'div',
         {
           tabIndex: '0',
-          className: 'opm-container ' + (shrink ? 'shrink' : ''),
+          className: 'opm-container ' + (shrink ? 'opm-shrink' : ''),
           style: { background: bgColor, color: textColor, border: border, borderRadius: radius },
           onKeyDown: function onKeyDown(e) {
             return _this5.handleKeyDown(e);
@@ -377,12 +377,12 @@ var OpiumSelect = function (_React$Component) {
             } },
           React.createElement(
             'span',
-            { className: 'opm-selected-text ' + (!selected ? 'placeholder' : '') },
+            { className: 'opm-selected-text ' + (!selected ? 'opm-placeholder' : '') },
             this._getLabelByValue(selected)
           ),
           React.createElement(
             'svg',
-            { className: 'chevron', width: '9', height: '14', viewBox: '0 0 9 14', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
+            { className: 'opm-chevron', width: '9', height: '14', viewBox: '0 0 9 14', version: '1.1', xmlns: 'http://www.w3.org/2000/svg' },
             React.createElement(
               'g',
               { fillRule: 'nonzero', fill: textColor, stroke: 'none', strokeWidth: '1' },
@@ -393,7 +393,7 @@ var OpiumSelect = function (_React$Component) {
         React.createElement(
           'ul',
           {
-            className: 'opm-list ' + (!isOpen ? 'is-hidden' : ''),
+            className: 'opm-list ' + (!isOpen ? 'opm-hidden' : ''),
             style: { top: topOffset, left: -borderWidth, width: 'calc(100% + ' + 2 * borderWidth + 'px)' },
             ref: function ref(el) {
               _this5.dropdownList = el;
