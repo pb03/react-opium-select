@@ -8,7 +8,7 @@ export default [
 		output: {
 			file: pkg.main,
 			format: 'umd',
-			name: 'reactOpiumSelect',
+			name: 'ReactOpiumSelect',
 			globals: {
 				react: 'React'
 			}

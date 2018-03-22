@@ -1,7 +1,7 @@
 {
   "name": "react-opium-select",
   "version": "0.4.1",
-  "description": "A simple select dropdown with a better UI.",
+  "description": "Simple select dropdown with a better UI.",
   "main": "dist/browser.js",
   "module": "dist/es.js",
   "browser": "dist/browser.js",
@@ -12,9 +12,6 @@
     "demo.gif"
   ],
   "peerDependencies": {
-    "react": "^16.2.0"
-  },
-  "dependencies": {
     "react": "^16.2.0"
   },
   "scripts": {
