@@ -1,10 +1,12 @@
 # react-opium-select
-A simple select dropdown with a better UI.
+Simple select dropdown with a better UI.
 
 <img src="https://github.com/pb03/react-opium-select/raw/master/demo.gif" width="680" alt="Demo">
 
 ## Installation
 ```npm i react-opium-select```
+
+[Live demo](https://codepen.io/prasanjit/full/LdjQWv/)
 
 ## Usage
 
@@ -67,6 +69,8 @@ export default App;
 | `background` | String | `#f1f2f3` | Background color - solid or gradient. |
 | `textColor` | String | `#3A3A3D` | Text color, also used to compute scrollbar and hover colors, must be hex code. |
 | `radius` | Number | `0` | Border radius |
-| `borderWidth` | Number | `0` | Thikness of border |
-| `borderColor` | String | `#5D5E5F` | Border color |
+| `borderWidth`<sup>#</sup> | Number | `0` | Thikness of border |
+| `borderColor`<sup>#</sup> | String | `#5D5E5F` | Border color |
+
+<small># Applying border is currently an experimental feature.</small>
 

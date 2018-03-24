@@ -198,7 +198,7 @@ class OpiumSelect extends React.Component {
 
   _setDimensions() {
     window.onload = () => {
-      const { maxItems, forceDirection } = this.state;
+      const { maxItems = this.props.options.length, forceDirection } = this.state;
       const itemHeight = this.displayedItem.offsetHeight;
       
       this.setState({
@@ -206,13 +206,11 @@ class OpiumSelect extends React.Component {
         midItemCount: Math.floor(maxItems / 2)
       });
 
-      if (maxItems) {
-        this.dropdownList.style.setProperty('--maxHeight', `${itemHeight * maxItems}px`);
-      }
+      this.dropdownList.style.setProperty('--maxHeight', `${itemHeight * maxItems}px`);
 
       if (forceDirection) return;
 
-      const spaceRequired = (maxItems || this.props.options.length) * itemHeight;
+      const spaceRequired = maxItems * itemHeight;
       const topSpace = this.container.offsetTop;
       const bottomSpace = window.innerHeight - (topSpace + itemHeight);
 

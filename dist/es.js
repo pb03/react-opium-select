@@ -246,7 +246,8 @@ var OpiumSelect = function (_React$Component) {
 
       window.onload = function () {
         var _state3 = _this4.state,
-            maxItems = _state3.maxItems,
+            _state3$maxItems = _state3.maxItems,
+            maxItems = _state3$maxItems === undefined ? _this4.props.options.length : _state3$maxItems,
             forceDirection = _state3.forceDirection;
 
         var itemHeight = _this4.displayedItem.offsetHeight;
@@ -256,13 +257,11 @@ var OpiumSelect = function (_React$Component) {
           midItemCount: Math.floor(maxItems / 2)
         });
 
-        if (maxItems) {
-          _this4.dropdownList.style.setProperty('--maxHeight', itemHeight * maxItems + 'px');
-        }
+        _this4.dropdownList.style.setProperty('--maxHeight', itemHeight * maxItems + 'px');
 
         if (forceDirection) return;
 
-        var spaceRequired = (maxItems || _this4.props.options.length) * itemHeight;
+        var spaceRequired = maxItems * itemHeight;
         var topSpace = _this4.container.offsetTop;
         var bottomSpace = window.innerHeight - (topSpace + itemHeight);
 
