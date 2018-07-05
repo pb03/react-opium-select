@@ -3,10 +3,10 @@ Simple select dropdown with a better UI.
 
 <img src="https://github.com/pb03/react-opium-select/raw/master/demo.gif" width="680" alt="Demo">
 
+[Live demo](https://codepen.io/prasanjit/full/LdjQWv/)
+
 ## Installation
 ```npm i react-opium-select```
-
-[Live demo](https://codepen.io/prasanjit/full/LdjQWv/)
 
 ## Usage
 
@@ -50,13 +50,13 @@ export default App;
 |---|---|---|---|
 | `options` | Array | - | Select options passed as an array of objects. e.g. `[{ label: 'Chandigarh', value: 'chandigarh' }, ...]`
 | `selectedValue` | String | `null` | Selected option |
-| `settings` | Array | - | UI settings - `style`, `placeholder`, `maxItems`, `animateOnSelect`, `forceDirection` |
+| [`settings`](#settings) | Array | - | UI settings - `style`, `placeholder`, `maxItems`, `animateOnSelect`, `forceDirection` |
 | `onChange` | Function | `undefined` | onChange handler
 
 ### Settings
 | Props | Type | Default value | Description |
 |---|---|---|---|
-| `style` | Array | - | CSS styling options - `padding`, `background`, `textColor`, `radius`, `borderWidth`, `borderColor` |
+| [`style`](#style) | Array | - | CSS styling options - `padding`, `background`, `textColor`, `radius`, `borderWidth`, `borderColor` |
 | `placeholder` | String | - | Placeholder for select dropdown |
 | `maxItems` | Number | `null` | Scroll items after this number |
 | `animateOnSelect` | Boolean | `true` | Subtle animation on item select |

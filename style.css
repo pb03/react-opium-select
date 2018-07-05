@@ -17,7 +17,7 @@
 }
 
 .opm-shrink {
-  transform: scaleY(0.9);
+  transform: scaleY(0.92);
 }
 
 .opm-selected {
@@ -31,7 +31,7 @@
 }
 
 .opm-shrink .opm-selected {
-  transform: scaleY(1.08);
+  transform: scaleY(1.07);
 }
 
 .opm-selected-text {
@@ -45,18 +45,12 @@
   opacity: 0.5;
 }
 
-.opm-chevron {
-  opacity: 0.8;
-}
-
 .opm-list {
-  --clip: inset(0 -1px 0 0);
-  --opacity: 0;
   --maxHeight: none;
   --hover: rgba(0, 0, 0, 0.1);
   --scrollbar: rgba(0, 0, 0, 0.1);
   --scrollbarThumb: rgba(0, 0, 0, 0.3);
-  
+
   position: absolute;
   z-index: 11;
   width: 100%;
@@ -68,11 +62,8 @@
   list-style: none;
   overflow: auto;
   max-height: var(--maxHeight);
-  opacity: var(--opacity);
-  -webkit-clip-path: var(--clip);
-  clip-path: var(--clip);
-  transition: clip-path 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  will-change: clip-path;
+  transition: clip-path 0.48s cubic-bezier(0.2, 1, 0.22, 1), opacity 0.18s;
+  will-change: clip-path, opacity;
 }
 
 .opm-list::-webkit-scrollbar {
