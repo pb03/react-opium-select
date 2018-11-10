@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,46 +8,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OpiumSelect = function (_React$PureComponent) {
-  _inherits(OpiumSelect, _React$PureComponent);
+var DEFAULT_PADDING = '10px 14px';
+var DEFAULT_BACKGROUND = '#f1f2f3';
+var DEFAULT_COLOR = '#3a3a3d';
+var DEFAULT_RADIUS = 0;
+var DEFAULT_BORDER_WIDTH = 0;
+var DEFAULT_BORDER_COLOR = '#5d5e5f';
+
+var OpiumSelect = function (_PureComponent) {
+  _inherits(OpiumSelect, _PureComponent);
 
   function OpiumSelect(props) {
     _classCallCheck(this, OpiumSelect);
 
     var _this = _possibleConstructorReturn(this, (OpiumSelect.__proto__ || Object.getPrototypeOf(OpiumSelect)).call(this, props));
 
-    var _ref = props.settings || {},
-        maxItems = _ref.maxItems,
-        _ref$style = _ref.style,
-        style = _ref$style === undefined ? {} : _ref$style;
-
-    var _style$padding = style.padding,
-        padding = _style$padding === undefined ? '10px 14px' : _style$padding,
-        _style$borderWidth = style.borderWidth,
-        borderWidth = _style$borderWidth === undefined ? 0 : _style$borderWidth,
-        _style$borderRadius = style.borderRadius,
-        radius = _style$borderRadius === undefined ? 0 : _style$borderRadius,
-        _style$borderColor = style.borderColor,
-        borderColor = _style$borderColor === undefined ? '#5D5E5F' : _style$borderColor,
-        _style$background = style.background,
-        bgColor = _style$background === undefined ? '#f1f2f3' : _style$background,
-        _style$textColor = style.textColor,
-        textColor = _style$textColor === undefined ? '#3a3a3d' : _style$textColor;
-
-
     _this.state = {
       isOpen: false,
       shrink: false,
       selected: null,
       itemHeight: null,
-      midItemCount: null,
-      maxItems: maxItems,
-      padding: padding,
-      borderWidth: borderWidth,
-      border: borderWidth ? borderWidth + 'px solid ' + borderColor : 0,
-      bgColor: bgColor,
-      textColor: textColor,
-      radius: radius === 0 && borderWidth ? 1 : radius
+      midItemCount: null
     };
 
     _this.handleClick = _this.handleClick.bind(_this);
@@ -60,22 +41,11 @@ var OpiumSelect = function (_React$PureComponent) {
   _createClass(OpiumSelect, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props$options = this.props.options,
-          options = _props$options === undefined ? [] : _props$options;
-
-
-      if (!options.length) return;
+      if (!this.props.options.length) return;
 
       document.addEventListener('mousedown', this.handleClick, false);
       this._setInitialValue();
       this._setDimensions();
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(newProps) {
-      if (newProps.selectedValue !== this.props.selectedValue) {
-        this.setState({ selected: newProps.selectedValue });
-      }
     }
   }, {
     key: 'componentWillUnmount',
@@ -94,18 +64,11 @@ var OpiumSelect = function (_React$PureComponent) {
     value: function hideDropdown() {
       var _this2 = this;
 
-      this.setState({ isOpen: false });
+      this.setState({ isOpen: false, shrink: true });
 
-      var _props$animateOnSelec = this.props.animateOnSelect,
-          animateOnSelect = _props$animateOnSelec === undefined ? true : _props$animateOnSelec;
-
-
-      if (animateOnSelect) {
-        this.setState({ shrink: true });
-        setTimeout(function () {
-          _this2.setState({ shrink: false });
-        }, 200);
-      }
+      setTimeout(function () {
+        _this2.setState({ shrink: false });
+      }, 200);
     }
   }, {
     key: 'toggleDropdown',
@@ -114,18 +77,20 @@ var OpiumSelect = function (_React$PureComponent) {
 
       var _props = this.props,
           options = _props.options,
-          forceDirection = _props.forceDirection;
-
-      var totalOptions = options.length;
+          forceDirection = _props.forceDirection,
+          _props$settings = _props.settings,
+          _props$settings$maxIt = _props$settings.maxItems,
+          maxItems = _props$settings$maxIt === undefined ? options.length : _props$settings$maxIt,
+          _props$settings$style = _props$settings.style.borderWidth,
+          borderWidth = _props$settings$style === undefined ? DEFAULT_BORDER_WIDTH : _props$settings$style;
       var _state = this.state,
           isOpen = _state.isOpen,
           itemHeight = _state.itemHeight,
-          borderWidth = _state.borderWidth,
           midItemCount = _state.midItemCount,
-          _state$maxItems = _state.maxItems,
-          maxItems = _state$maxItems === undefined ? totalOptions : _state$maxItems,
           selected = _state.selected;
 
+
+      var totalOptions = options.length;
 
       if (isOpen) {
         this.hideDropdown();
@@ -249,11 +214,12 @@ var OpiumSelect = function (_React$PureComponent) {
       window.onload = function () {
         var _props2 = _this4.props,
             options = _props2.options,
-            forceDirection = _props2.forceDirection;
-        var _state2 = _this4.state,
-            _state2$maxItems = _state2.maxItems,
-            maxItems = _state2$maxItems === undefined ? options.length : _state2$maxItems,
-            borderWidth = _state2.borderWidth;
+            forceDirection = _props2.forceDirection,
+            _props2$settings = _props2.settings,
+            _props2$settings$maxI = _props2$settings.maxItems,
+            maxItems = _props2$settings$maxI === undefined ? options.length : _props2$settings$maxI,
+            _props2$settings$styl = _props2$settings.style.borderWidth,
+            borderWidth = _props2$settings$styl === undefined ? DEFAULT_BORDER_WIDTH : _props2$settings$styl;
 
         var container = _this4.container.current;
         var itemHeight = container.offsetHeight - borderWidth * 2;
@@ -284,13 +250,12 @@ var OpiumSelect = function (_React$PureComponent) {
     key: '_setInitialValue',
     value: function _setInitialValue() {
       var selectedValue = this.props.selectedValue;
-
-      var _ref2 = this.props.settings || {},
-          placeholder = _ref2.placeholder;
+      var _props$settings2 = this.props.settings,
+          placeholder = _props$settings2.placeholder,
+          _props$settings2$styl = _props$settings2.style.textColor,
+          textColor = _props$settings2$styl === undefined ? DEFAULT_COLOR : _props$settings2$styl;
 
       var dropdownStyle = this.container.current.lastChild.style;
-      var textColor = this.state.textColor;
-
 
       dropdownStyle.setProperty('--hover', '' + this._addtransparency(textColor, 12));
       dropdownStyle.setProperty('--scrollbar', '' + this._addtransparency(textColor, 20));
@@ -336,32 +301,41 @@ var OpiumSelect = function (_React$PureComponent) {
     value: function render() {
       var _this5 = this;
 
-      var _props$options2 = this.props.options,
-          options = _props$options2 === undefined ? [] : _props$options2;
+      var _props3 = this.props,
+          options = _props3.options,
+          _props3$settings$styl = _props3.settings.style,
+          _props3$settings$styl2 = _props3$settings$styl.padding,
+          padding = _props3$settings$styl2 === undefined ? DEFAULT_PADDING : _props3$settings$styl2,
+          _props3$settings$styl3 = _props3$settings$styl.borderRadius,
+          borderRadius = _props3$settings$styl3 === undefined ? DEFAULT_RADIUS : _props3$settings$styl3,
+          _props3$settings$styl4 = _props3$settings$styl.background,
+          background = _props3$settings$styl4 === undefined ? DEFAULT_BACKGROUND : _props3$settings$styl4,
+          _props3$settings$styl5 = _props3$settings$styl.textColor,
+          color = _props3$settings$styl5 === undefined ? DEFAULT_COLOR : _props3$settings$styl5,
+          _props3$settings$styl6 = _props3$settings$styl.borderWidth,
+          borderWidth = _props3$settings$styl6 === undefined ? DEFAULT_BORDER_WIDTH : _props3$settings$styl6,
+          _props3$settings$styl7 = _props3$settings$styl.borderColor,
+          borderColor = _props3$settings$styl7 === undefined ? DEFAULT_BORDER_COLOR : _props3$settings$styl7;
 
 
       if (!options.length) {
         return 'Err: No options found.';
       }
 
-      var _state3 = this.state,
-          padding = _state3.padding,
-          border = _state3.border,
-          borderWidth = _state3.borderWidth,
-          bgColor = _state3.bgColor,
-          textColor = _state3.textColor,
-          radius = _state3.radius,
-          selected = _state3.selected,
-          isOpen = _state3.isOpen,
-          shrink = _state3.shrink;
+      var _state2 = this.state,
+          selected = _state2.selected,
+          isOpen = _state2.isOpen,
+          shrink = _state2.shrink;
 
+
+      var border = borderWidth ? borderWidth + 'px solid ' + borderColor : 0;
 
       return React.createElement(
         'div',
         {
           tabIndex: '0',
           className: 'opm-container ' + (shrink ? 'opm-shrink' : ''),
-          style: { background: bgColor, color: textColor, border: border, borderRadius: radius },
+          style: { background: background, color: color, border: border, borderRadius: borderRadius },
           onKeyDown: this.handleKeyDown,
           ref: this.container },
         React.createElement(
@@ -380,7 +354,7 @@ var OpiumSelect = function (_React$PureComponent) {
             { width: '9', height: '14', viewBox: '0 0 9 14' },
             React.createElement(
               'g',
-              { fillRule: 'nonzero', fill: textColor, opacity: '0.8', stroke: 'none', strokeWidth: '1' },
+              { fillRule: 'nonzero', fill: color, opacity: '0.8', stroke: 'none', strokeWidth: '1' },
               React.createElement('path', { d: 'M.829 4.997a.602.602 0 0 0 .426-.17l3.221-3.355 3.292 3.356c.237.241.616.241.83 0 .236-.242.236-.628 0-.845L4.877.193C4.762.073 4.619 0 4.454.024a.674.674 0 0 0-.427.17L.403 3.982c-.237.241-.237.627 0 .845.118.12.26.169.426.169zM.403 9.993L4.12 13.76c.118.12.26.169.426.169a.674.674 0 0 0 .427-.17L8.62 9.97c.237-.241.237-.628 0-.845-.237-.241-.616-.241-.829 0L4.524 12.48 1.232 9.124c-.237-.241-.616-.241-.83 0a.62.62 0 0 0 0 .87z' })
             )
           )
@@ -405,7 +379,13 @@ var OpiumSelect = function (_React$PureComponent) {
               selected === item.value && React.createElement(
                 'svg',
                 { width: '11', height: '8', viewBox: '0 0 11 8' },
-                React.createElement('path', { d: 'M1.422 4.341a.83.83 0 0 0-1.128-.083.734.734 0 0 0-.088 1.071l2.122 2.353.608-.494-.609.495a.832.832 0 0 0 1.194.026l7.104-6.282a.734.734 0 0 0 .04-1.075.83.83 0 0 0-1.13-.038L3 6.092l-1.58-1.75z', fillRule: 'nonzero', fill: textColor, stroke: 'none', strokeWidth: '1', opacity: '0.85' })
+                React.createElement('path', { d: 'M1.422 4.341a.83.83 0 0 0-1.128-.083.734.734 0 0 0-.088 1.071l2.122 2.353.608-.494-.609.495a.832.832 0 0 0 1.194.026l7.104-6.282a.734.734 0 0 0 .04-1.075.83.83 0 0 0-1.13-.038L3 6.092l-1.58-1.75z',
+                  fillRule: 'nonzero',
+                  fill: color,
+                  stroke: 'none',
+                  strokeWidth: '1',
+                  opacity: '0.85'
+                })
               )
             );
           })
@@ -415,9 +395,11 @@ var OpiumSelect = function (_React$PureComponent) {
   }]);
 
   return OpiumSelect;
-}(React.PureComponent);
+}(PureComponent);
 
 OpiumSelect.defaultProps = {
+  options: [],
+  settings: {},
   onChange: function onChange() {}
 };
 

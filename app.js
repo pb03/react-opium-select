@@ -1,33 +1,22 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-class OpiumSelect extends React.PureComponent {
+const DEFAULT_PADDING = '10px 14px';
+const DEFAULT_BACKGROUND = '#f1f2f3';
+const DEFAULT_COLOR = '#3a3a3d';
+const DEFAULT_RADIUS = 0;
+const DEFAULT_BORDER_WIDTH = 0;
+const DEFAULT_BORDER_COLOR = '#5d5e5f';
+
+class OpiumSelect extends PureComponent {
   constructor(props) {
     super(props);
-
-    const { maxItems, style = {} } = props.settings || {};
-
-    const {
-      padding = '10px 14px',
-      borderWidth = 0,
-      borderRadius: radius = 0,
-      borderColor = '#5D5E5F',
-      background: bgColor = '#f1f2f3',
-      textColor = '#3a3a3d'
-    } = style;
 
     this.state = {
       isOpen: false,
       shrink: false,
       selected: null,
       itemHeight: null,
-      midItemCount: null,
-      maxItems: maxItems,
-      padding: padding,
-      borderWidth: borderWidth,
-      border: borderWidth ? `${borderWidth}px solid ${borderColor}` : 0,
-      bgColor: bgColor,
-      textColor: textColor,
-      radius: radius === 0 && borderWidth ? 1 : radius
+      midItemCount: null
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -37,53 +26,62 @@ class OpiumSelect extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { options = [] } = this.props;
+    if (!this.props.options.length) return;
 
-    if (!options.length) return;
-
-    document.addEventListener('mousedown', this.handleClick, false);
+    document.addEventListener(
+      'mousedown',
+      this.handleClick,
+      false
+    );
     this._setInitialValue();
     this._setDimensions();
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.selectedValue !== this.props.selectedValue) {
-      this.setState({ selected: newProps.selectedValue });
-    }
-  }
-
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClick, false);
+    document.removeEventListener(
+      'mousedown',
+      this.handleClick,
+      false
+    );
   }
 
   handleClick(e) {
-    if (!this.container.current.contains(e.target) && this.state.isOpen) {
+    if (
+      !this.container.current.contains(e.target) &&
+      this.state.isOpen
+    ) {
       this.hideDropdown();
     }
   }
 
   hideDropdown() {
-    this.setState({ isOpen: false });
+    this.setState({ isOpen: false, shrink: true });
 
-    const { animateOnSelect = true } = this.props;
-
-    if (animateOnSelect) {
-      this.setState({ shrink: true });
-      setTimeout(() => {
-        this.setState({ shrink: false });
-      }, 200);
-    }
+    setTimeout(() => {
+      this.setState({ shrink: false });
+    }, 200);
   }
 
   toggleDropdown() {
-    const { options, forceDirection } = this.props;
+    const {
+      options,
+      forceDirection,
+      settings: {
+        maxItems = options.length,
+        style: {
+          borderWidth = DEFAULT_BORDER_WIDTH
+        }
+      }
+    } = this.props;
+
+    const {
+      isOpen,
+      itemHeight,
+      midItemCount,
+      selected
+    } = this.state;
+
     const totalOptions = options.length;
-    const { isOpen,
-            itemHeight,
-            borderWidth,
-            midItemCount,
-            maxItems = totalOptions,
-            selected } = this.state;
 
     if (isOpen) {
       this.hideDropdown();
@@ -192,8 +190,16 @@ class OpiumSelect extends React.PureComponent {
 
   _setDimensions() {
     window.onload = () => {
-      const { options, forceDirection } = this.props;
-      const { maxItems = options.length, borderWidth } = this.state;
+      const {
+        options,
+        forceDirection,
+        settings: {
+          maxItems = options.length,
+          style: {
+            borderWidth = DEFAULT_BORDER_WIDTH
+          }
+        }
+      } = this.props;
       const container = this.container.current;
       const itemHeight = container.offsetHeight - borderWidth * 2;
 
@@ -222,9 +228,8 @@ class OpiumSelect extends React.PureComponent {
 
   _setInitialValue() {
     const { selectedValue } = this.props;
-    const { placeholder } = this.props.settings || {};
+    const { placeholder, style: { textColor = DEFAULT_COLOR } } = this.props.settings;
     const dropdownStyle = this.container.current.lastChild.style;
-    const { textColor } = this.state;
 
     dropdownStyle.setProperty('--hover', `${this._addtransparency(textColor, 12)}`);
     dropdownStyle.setProperty('--scrollbar', `${this._addtransparency(textColor, 20)}`);
@@ -263,27 +268,33 @@ class OpiumSelect extends React.PureComponent {
   }
 
   render() {
-    const { options = [] } = this.props;
+    const {
+      options,
+      settings: {
+        style: {
+          padding = DEFAULT_PADDING,
+          borderRadius = DEFAULT_RADIUS,
+          background = DEFAULT_BACKGROUND,
+          textColor: color = DEFAULT_COLOR,
+          borderWidth = DEFAULT_BORDER_WIDTH,
+          borderColor = DEFAULT_BORDER_COLOR
+        }
+      }
+    } = this.props;
 
     if (!options.length) {
       return 'Err: No options found.';
     }
 
-    const { padding,
-            border,
-            borderWidth,
-            bgColor,
-            textColor,
-            radius,
-            selected,
-            isOpen,
-            shrink } = this.state;
+    const { selected, isOpen, shrink } = this.state;
+
+    const border = borderWidth ? `${borderWidth}px solid ${borderColor}` : 0
 
     return (
       <div
         tabIndex='0'
         className={`opm-container ${shrink ? 'opm-shrink' : ''}`}
-        style={{ background: bgColor, color: textColor, border: border, borderRadius: radius }}
+        style={{ background, color, border, borderRadius }}
         onKeyDown={this.handleKeyDown}
         ref={this.container}>
         <span
@@ -294,7 +305,7 @@ class OpiumSelect extends React.PureComponent {
             {this._getLabelByValue(selected)}
           </span>
           <svg width="9" height="14" viewBox="0 0 9 14">
-            <g fillRule="nonzero" fill={textColor} opacity="0.8" stroke="none" strokeWidth="1">
+            <g fillRule="nonzero" fill={color} opacity="0.8" stroke="none" strokeWidth="1">
               <path d="M.829 4.997a.602.602 0 0 0 .426-.17l3.221-3.355 3.292 3.356c.237.241.616.241.83 0 .236-.242.236-.628 0-.845L4.877.193C4.762.073 4.619 0 4.454.024a.674.674 0 0 0-.427.17L.403 3.982c-.237.241-.237.627 0 .845.118.12.26.169.426.169zM.403 9.993L4.12 13.76c.118.12.26.169.426.169a.674.674 0 0 0 .427-.17L8.62 9.97c.237-.241.237-.628 0-.845-.237-.241-.616-.241-.829 0L4.524 12.48 1.232 9.124c-.237-.241-.616-.241-.83 0a.62.62 0 0 0 0 .87z"/>
             </g>
           </svg>
@@ -303,8 +314,8 @@ class OpiumSelect extends React.PureComponent {
         <ul
           className={`opm-list ${!isOpen ? 'opm-hidden' : ''}`}
           style={{ left: -borderWidth, width: `calc(100% + ${2 * borderWidth}px)` }}>
-          {options.map(item =>
-            (<li
+          {options.map(item => (
+            <li
               key={item.value}
               className='opm-item'
               style={{ padding: padding }}
@@ -313,8 +324,15 @@ class OpiumSelect extends React.PureComponent {
               {item.label}
               {selected === item.value &&
                 <svg width="11" height="8" viewBox="0 0 11 8">
-                  <path d="M1.422 4.341a.83.83 0 0 0-1.128-.083.734.734 0 0 0-.088 1.071l2.122 2.353.608-.494-.609.495a.832.832 0 0 0 1.194.026l7.104-6.282a.734.734 0 0 0 .04-1.075.83.83 0 0 0-1.13-.038L3 6.092l-1.58-1.75z" fillRule="nonzero" fill={textColor} stroke="none" strokeWidth="1" opacity="0.85"/>
-                </svg>}
+                  <path d="M1.422 4.341a.83.83 0 0 0-1.128-.083.734.734 0 0 0-.088 1.071l2.122 2.353.608-.494-.609.495a.832.832 0 0 0 1.194.026l7.104-6.282a.734.734 0 0 0 .04-1.075.83.83 0 0 0-1.13-.038L3 6.092l-1.58-1.75z"
+                    fillRule="nonzero"
+                    fill={color}
+                    stroke="none"
+                    strokeWidth="1"
+                    opacity="0.85"
+                  />
+                </svg>
+              }
             </li>)
           )}
         </ul>
@@ -324,6 +342,8 @@ class OpiumSelect extends React.PureComponent {
 }
 
 OpiumSelect.defaultProps = {
+  options: [],
+  settings: {},
   onChange: () => {}
 };
 
