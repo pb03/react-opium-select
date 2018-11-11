@@ -2,6 +2,7 @@
 Simple select dropdown with a better UI.
 
 [Demo on CodePen](https://codepen.io/prasanjit/full/LdjQWv/)
+
 <img src="https://github.com/pb03/react-opium-select/raw/master/demo.gif" width="680" alt="Demo">
 
 ## Installation
