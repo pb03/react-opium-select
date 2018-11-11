@@ -1,6 +1,6 @@
 {
   "name": "react-opium-select",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Simple select dropdown with a better UI.",
   "main": "dist/browser.js",
   "module": "dist/es.js",
@@ -29,13 +29,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.24.1",
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "rollup": "^0.57.1",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-uglify": "^3.0.0"
+    "rollup": "^0.67.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-uglify": "^6.0.0"
   },
   "keywords": [
     "select",
